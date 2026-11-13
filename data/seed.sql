@@ -1,4 +1,7 @@
 PRAGMA foreign_keys = ON;
+CREATE TABLE users (user_id INTEGER PRIMARY KEY, email TEXT NOT NULL UNIQUE COLLATE NOCASE, password_hash TEXT NOT NULL, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP);
+CREATE TABLE password_reset_tokens (token_hash TEXT PRIMARY KEY, user_id INTEGER NOT NULL REFERENCES users(user_id) ON DELETE CASCADE, expires_at INTEGER NOT NULL, used_at INTEGER);
+CREATE INDEX idx_password_reset_user ON password_reset_tokens(user_id);
 CREATE TABLE channels (channel_id TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, channel_type TEXT NOT NULL CHECK (channel_type IN ('digital','offline')));
 CREATE TABLE audiences (audience_id TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, segment TEXT NOT NULL);
 CREATE TABLE creatives (creative_id TEXT NOT NULL PRIMARY KEY, name TEXT NOT NULL, format TEXT NOT NULL, status TEXT NOT NULL);
