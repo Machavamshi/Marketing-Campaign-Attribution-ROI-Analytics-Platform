@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<div class="page-heading d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4"><div><p class="eyebrow mb-1">CUSTOMER AND SALES DATA</p><h1>{{ title }}</h1></div><form class="d-flex" method="get"><input class="form-control" name="q" value="{{ query }}" placeholder="Search records"><button class="btn btn-outline-secondary ms-2"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="10.8" cy="10.8" r="6.8"/><path d="m16 16 4.5 4.5"/></svg>Search</button></form></div>
+<section class="panel"><div class="d-flex justify-content-end mb-3"><a class="btn btn-outline-secondary btn-sm" href="{{ url_for('data.export_csv', table_name=entity) }}"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5"/><path d="M4 17v3h16v-3"/></svg>Export CSV</a></div><div class="table-responsive"><table class="table align-middle"><thead><tr>{% for column in columns %}<th>{{ column|replace('_',' ')|title }}</th>{% endfor %}{% if entity == 'contacts' %}<th>Journey</th>{% endif %}</tr></thead><tbody>
+{% for row in rows %}<tr>{% for column in columns %}<td>{{ row[column] if row[column] is not none else '—' }}</td>{% endfor %}{% if entity == 'contacts' %}<td><a href="{{ url_for('entities.contact_journey', contact_id=row.contact_id) }}">View journey →</a></td>{% endif %}</tr>{% else %}<tr><td colspan="{{ columns|length + (1 if entity == 'contacts' else 0) }}" class="text-secondary">No records found.</td></tr>{% endfor %}
+</tbody></table></div><p class="small text-secondary mb-0">Showing at most 300 records. Use search to narrow results.</p></section>
+{% endblock %}

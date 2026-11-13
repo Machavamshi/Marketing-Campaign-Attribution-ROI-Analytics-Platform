@@ -1,0 +1,20 @@
+{
+  "passed": true,
+  "checks": {
+    "primary_key_rows_checked": 40820,
+    "foreign_key_values_checked": 108546,
+    "attribution_reconciliation_models_checked": 3,
+    "duplicate_orders_detected": 1,
+    "lifecycle_transitions_checked": 4193,
+    "campaign_date_ranges_checked": 50,
+    "touchpoint_date_and_channel_rules_checked": 20000,
+    "session_time_orderings_checked": 1099,
+    "lead_source_orderings_checked": 1100,
+    "opportunity_lifecycle_checked": 1000,
+    "cost_date_ranges_checked": 49,
+    "order_reconciliations_checked": 346,
+    "attribution_weight_groups_checked": 1035
+  },
+  "errors": [],
+  "canonical_closed_won_revenue": "8969896.00"
+}

@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Customer journey{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><a class="small" href="{{ url_for('entities.list_entity', entity='contacts') }}">← Contacts</a><p class="eyebrow mt-3 mb-1">CUSTOMER JOURNEY</p><h1>{{ contact.contact_id }}</h1><p class="text-secondary">{{ contact.region }} · {{ contact.lifecycle_state }} · Consent {{ contact.consent_status }}</p></div>
+<section class="panel"><h2>Journey timeline</h2><div class="timeline">{% for event in events %}<div class="timeline-event"><div class="timeline-dot"></div><div><div class="text-secondary small">{{ event.occurred_at }}</div><strong>{{ event.label }}</strong><div>{{ event.detail }} <span class="text-secondary small">· {{ event.id }}</span></div></div></div>{% else %}<p class="text-secondary">No journey events for this contact.</p>{% endfor %}</div></section>
+{% endblock %}

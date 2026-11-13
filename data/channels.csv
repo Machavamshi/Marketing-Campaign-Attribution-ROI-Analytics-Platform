@@ -1,0 +1,9 @@
+channel_id,name,channel_type
+CH-001,Email,digital
+CH-002,Paid Search,digital
+CH-003,Organic Search,digital
+CH-004,Social,digital
+CH-005,Webinar,digital
+CH-006,Display,digital
+CH-007,Direct Mail,offline
+CH-008,Field Sales,offline

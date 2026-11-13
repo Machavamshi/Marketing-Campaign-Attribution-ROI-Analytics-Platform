@@ -1,0 +1,46 @@
+[
+  {
+    "case_id": "GT-001",
+    "issue_type": "duplicate_revenue",
+    "source_table": "orders",
+    "source_record_ids": "ORD-2026-000346",
+    "related_record_ids": "ORD-2026-000001;OPP-2026-000011",
+    "expected_decision": "Treat the repeated order for the same opportunity as a duplicate; count canonical opportunity revenue once.",
+    "severity": "high"
+  },
+  {
+    "case_id": "GT-002",
+    "issue_type": "post_conversion_touch",
+    "source_table": "touchpoints",
+    "source_record_ids": "TOUCH-CON-0000666-000005",
+    "related_record_ids": "OPP-2026-000021",
+    "expected_decision": "Exclude this touchpoint because it occurred after the opportunity conversion timestamp.",
+    "severity": "medium"
+  },
+  {
+    "case_id": "GT-003",
+    "issue_type": "currency_mismatch",
+    "source_table": "cost_records",
+    "source_record_ids": "COST-000049",
+    "related_record_ids": "CMP-2026-000049",
+    "expected_decision": "Do not include the non-INR cost in INR spend or ROI without a documented FX rate.",
+    "severity": "high"
+  },
+  {
+    "case_id": "GT-004",
+    "issue_type": "omitted_campaign_cost",
+    "source_table": "campaigns",
+    "source_record_ids": "CMP-2026-000050",
+    "expected_decision": "Report ROI as unavailable; do not infer missing spend as zero.",
+    "severity": "medium"
+  },
+  {
+    "case_id": "GT-005",
+    "issue_type": "anonymous_session_link",
+    "source_table": "web_sessions",
+    "source_record_ids": "SES-2026-000001",
+    "related_record_ids": "LEAD-2026-000001",
+    "expected_decision": "Flag the session-to-lead link as unsupported because contact and touchpoint evidence are absent.",
+    "severity": "high"
+  }
+]

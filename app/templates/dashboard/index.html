@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Dashboard{% endblock %}
+{% block content %}
+<div class="page-heading d-flex flex-wrap justify-content-between align-items-end gap-3 mb-4">
+  <div><p class="eyebrow mb-1">MARKETING PERFORMANCE</p><h1>Overview</h1><p class="text-secondary mb-0">Campaign investment through closed revenue, with attribution you can audit.</p></div>
+  <a class="btn btn-primary" href="{{ url_for('analytics.comparison') }}"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V5m0 14h16"/><path d="m7 15 4-4 3 2 5-6"/></svg>Compare attribution</a>
+</div>
+<div class="row g-3 mb-4">
+  {% for title, value, note in [
+    ('Campaigns', '{:,}'.format(summary.campaigns), 'Active and completed'),
+    ('Contacts', '{:,}'.format(summary.contacts), 'Synthetic profiles'),
+    ('Leads', '{:,}'.format(summary.leads), 'Journey-linked'),
+    ('Opportunities', '{:,}'.format(summary.opportunities), '{:,} closed won'.format(summary.closed_won)),
+    ('Closed revenue', '{:,.0f} {}'.format(summary.revenue, summary.currency), 'Canonical order revenue'),
+    ('Marketing spend', '{:,.0f} {}'.format(summary.spend, summary.currency), 'Known base-currency costs')
+  ] %}
+  <div class="col-6 col-xl-2"><div class="metric-card h-100"><div class="metric-label">{{ title }}</div><div class="metric-value">{{ value }}</div><div class="metric-note">{{ note }}</div></div></div>
+  {% endfor %}
+</div>
+<div class="row g-3 mb-4">
+  <div class="col-lg-8"><section class="panel h-100"><div class="panel-heading"><div><p class="eyebrow mb-1">MODEL COMPARISON</p><h2>Attributed revenue by campaign</h2></div><a href="{{ url_for('analytics.comparison') }}" class="small">Open analysis</a></div>
+    <div class="chart-wrap"><canvas id="modelChart" aria-label="Attributed revenue comparison chart"></canvas></div>
+  </section></div>
+  <div class="col-lg-4"><section class="panel h-100"><div class="panel-heading"><div><p class="eyebrow mb-1">RECONCILIATION</p><h2>Data quality</h2></div><span class="status-pill {{ 'status-good' if validation.passed else 'status-bad' }}">{{ 'PASS' if validation.passed else 'REVIEW' }}</span></div>
+    <div class="quality-row"><span>Overall ROI</span><strong>{% if summary.roi_percent is not none %}{{ '%.1f'|format(summary.roi_percent) }}%{% else %}—{% endif %}</strong></div>
+    <div class="quality-row"><span>Attribution coverage</span><strong>{{ validation.attribution_coverage.coverage_percent }}%</strong></div>
+    <div class="quality-row"><span>Revenue reconciles</span><strong>{{ 'Yes' if validation.passed else 'No' }}</strong></div>
+    <div class="quality-row"><span>Known duplicate orders</span><strong>{{ summary.duplicate_orders }}</strong></div>
+    <a class="btn btn-outline-secondary btn-sm mt-3" href="{{ url_for('data.validation') }}"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="m5 12 4 4L19 6"/></svg>View validation report</a>
+  </section></div>
+</div>
+<div class="row g-3">
+  <div class="col-lg-7"><section class="panel"><div class="panel-heading"><div><p class="eyebrow mb-1">TOP PERFORMERS</p><h2>Test period · linear attribution</h2></div><a href="{{ url_for('analytics.campaign_roi') }}" class="small">Campaign ROI</a></div>
+    <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Campaign</th><th>Channel</th><th class="text-end">Revenue</th><th class="text-end">ROI</th></tr></thead><tbody>
+      {% for row in comparison.linear[:6] %}<tr><td><a href="{{ url_for('campaigns.detail', campaign_id=row.campaign_id) }}">{{ row.name }}</a><div class="text-secondary small">{{ row.campaign_id }}</div></td><td>{{ row.channel }}</td><td class="text-end">{{ '{:,.2f}'.format(row.attributed_revenue or 0) }}</td><td class="text-end">{% if row.roi is not none %}{{ '{:.1%}'.format(row.roi) }}{% else %}<span class="text-secondary">Unavailable</span>{% endif %}</td></tr>{% else %}<tr><td colspan="4" class="text-secondary">No attributed conversions in this period.</td></tr>{% endfor %}
+    </tbody></table></div>
+  </section></div>
+  <div class="col-lg-5"><section class="panel"><div class="panel-heading"><div><p class="eyebrow mb-1">OPERATIONS</p><h2>Explore the data</h2></div></div>
+    <div class="quick-links"><a href="{{ url_for('campaigns.index') }}">Manage campaigns <span>→</span></a><a href="{{ url_for('entities.list_entity', entity='touchpoints') }}">Review touchpoints <span>→</span></a><a href="{{ url_for('entities.list_entity', entity='orders') }}">Inspect closed orders <span>→</span></a><a href="{{ url_for('data.exceptions') }}">Review labelled exceptions <span>→</span></a></div>
+  </section></div>
+</div>
+<script id="dashboard-data" type="application/json">{{ comparison|tojson }}</script>
+{% endblock %}

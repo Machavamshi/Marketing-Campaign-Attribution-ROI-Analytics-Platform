@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Exceptions{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><p class="eyebrow mb-1">DATA QUALITY</p><h1>Known exceptions</h1><p class="text-secondary">Ground-truth labels are kept separate from operational records and never drive attribution.</p></div>
+<div class="row g-3">{% for item in exceptions %}<div class="col-lg-6"><section class="panel h-100"><div class="d-flex justify-content-between gap-3"><div><p class="eyebrow mb-1">{{ item.case_id }} · {{ item.source_table }}</p><h2>{{ item.issue_type|replace('_',' ')|title }}</h2></div><span class="status-pill {{ 'status-bad' if item.severity=='high' else 'status-warn' }}">{{ item.severity }}</span></div><p><strong>Record:</strong> {{ item.source_record_ids }}</p>{% if item.related_record_ids %}<p><strong>Related:</strong> {{ item.related_record_ids }}</p>{% endif %}<p class="text-secondary mb-0">{{ item.expected_decision }}</p></section></div>{% else %}<div class="col-12"><section class="panel text-secondary">No ground-truth exception file found.</section></div>{% endfor %}</div>
+{% endblock %}

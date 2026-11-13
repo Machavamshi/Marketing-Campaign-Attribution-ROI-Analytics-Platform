@@ -1,0 +1,6 @@
+case_id,issue_type,source_table,source_record_ids,related_record_ids,expected_decision,severity
+GT-001,duplicate_revenue,orders,ORD-2026-000346,ORD-2026-000001;OPP-2026-000011,Treat the repeated order for the same opportunity as a duplicate; count canonical opportunity revenue once.,high
+GT-002,post_conversion_touch,touchpoints,TOUCH-CON-0000666-000005,OPP-2026-000021,Exclude this touchpoint because it occurred after the opportunity conversion timestamp.,medium
+GT-003,currency_mismatch,cost_records,COST-000049,CMP-2026-000049,Do not include the non-INR cost in INR spend or ROI without a documented FX rate.,high
+GT-004,omitted_campaign_cost,campaigns,CMP-2026-000050,,Report ROI as unavailable; do not infer missing spend as zero.,medium
+GT-005,anonymous_session_link,web_sessions,SES-2026-000001,LEAD-2026-000001,Flag the session-to-lead link as unsupported because contact and touchpoint evidence are absent.,high

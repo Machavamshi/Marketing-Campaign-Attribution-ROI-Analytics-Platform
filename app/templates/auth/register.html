@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+<div class="auth-card">
+  <a class="auth-brand" href="{{ url_for('auth.login') }}"><span class="brand-mark">C</span> Campaign Atlas</a>
+  <p class="eyebrow mt-4 mb-1">GET STARTED</p>
+  <h1 class="auth-title">Create your account</h1>
+  <p class="text-secondary mb-4">Set up access to your campaign analytics workspace.</p>
+  <form method="post" action="{{ url_for('auth.register_submit') }}">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3">
+      <label class="form-label" for="email">Email</label>
+      <input class="form-control" id="email" name="email" type="email" autocomplete="email" required value="{{ request.form.get('email', '') }}">
+    </div>
+    <div class="mb-3">
+      <label class="form-label" for="password">Password</label>
+      <input class="form-control" id="password" name="password" type="password" autocomplete="new-password" minlength="6" required>
+      <div class="form-text">At least 6 characters, with an uppercase letter, a number, and a special character.</div>
+    </div>
+    <div class="mb-4">
+      <label class="form-label" for="confirm_password">Confirm password</label>
+      <input class="form-control" id="confirm_password" name="confirm_password" type="password" autocomplete="new-password" minlength="6" required>
+    </div>
+    <button class="btn btn-primary w-100" type="submit"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20v-1a6 6 0 0 1 12 0v1M19 8v6m-3-3h6"/></svg>Create account</button>
+  </form>
+  <p class="auth-switch mb-0 mt-4">Already registered? <a class="auth-link" href="{{ url_for('auth.login') }}">Sign in</a></p>
+</div>
+{% endblock %}

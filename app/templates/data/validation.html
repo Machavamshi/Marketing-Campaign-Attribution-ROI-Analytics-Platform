@@ -1,0 +1,6 @@
+{% extends "base.html" %}
+{% block title %}Validation report{% endblock %}
+{% block content %}
+<div class="page-heading mb-4"><p class="eyebrow mb-1">DATA QUALITY</p><h1>Validation report</h1><p class="text-secondary">Checks run against the active SQLite database.</p></div>
+<section class="panel"><div class="d-flex align-items-center gap-3 mb-4"><span class="status-pill {{ 'status-good' if summary.passed else 'status-bad' }}">{{ 'PASS' if summary.passed else 'REVIEW' }}</span><strong>{{ summary.foreign_key_violations }} foreign-key violations</strong></div><div class="quality-row"><span>Primary key duplicates in loaded SQLite tables</span><strong>{{ summary.primary_key_duplicates }}</strong></div><div class="quality-row"><span>Canonical closed-order revenue</span><strong>{{ '{:,.2f}'.format(summary.canonical_order_revenue) }} {{ config.BASE_CURRENCY }}</strong></div><div class="quality-row"><span>Attribution coverage</span><strong>{{ summary.attribution_coverage.coverage_percent }}%</strong></div><h2 class="mt-4">Revenue reconciliation by model</h2>{% for model, passes in summary.attribution_reconciles.items() %}<div class="quality-row"><span>{{ model|replace('_',' ')|title }}</span><strong>{{ 'Reconciled' if passes else 'Mismatch' }}</strong></div>{% endfor %}</section>
+{% endblock %}

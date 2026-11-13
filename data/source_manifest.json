@@ -1,0 +1,60 @@
+{
+  "dataset": "synthetic_campaign_attribution",
+  "seed": 20261022,
+  "base_currency": "INR",
+  "date_range": {
+    "start": "2026-01-01",
+    "end": "2026-12-31"
+  },
+  "requested_scale": {
+    "campaigns": 50,
+    "contacts": 5000,
+    "touchpoints": 20000,
+    "opportunities": 1000
+  },
+  "row_counts": {
+    "channels": 8,
+    "audiences": 20,
+    "creatives": 100,
+    "campaigns": 50,
+    "campaign_events": 50,
+    "contacts": 5000,
+    "contact_audiences": 5000,
+    "touchpoints": 20000,
+    "web_sessions": 1100,
+    "leads": 1100,
+    "lead_events": 2193,
+    "opportunities": 1000,
+    "opportunity_events": 2000,
+    "orders": 346,
+    "cost_records": 49,
+    "attribution_results": 2354,
+    "campaign_metrics": 450
+  },
+  "checksums_sha256": {
+    "channels.csv": "27d18c83336639268da6b80aac5808f5f38a7f97e4dc6c1d3f0835c1c8032808",
+    "audiences.csv": "9ec13b3d536f72fa85fdf07b48dda08843d9562f3b7408b00f6f2c2cae04f495",
+    "creatives.csv": "9117858cd003d3460801848de7079e16f93371cf4bad98d350ade44ebb8862bc",
+    "campaigns.csv": "b37f20d7687a670e98e979eb316b418b092391738ec524714c9cb5c688e09da6",
+    "campaign_events.csv": "445e8795b2de4ab128c187cd75137ab2716dc26c9213f7d0eb79faa6c3691693",
+    "contacts.csv": "38859db3047b3d7709b11a94cd511bd1f93db6fbcde402c672a70584371ede65",
+    "contact_audiences.csv": "c39166b859b8a80d679209307bc0ca44b949550632cec08090871749dd6778a2",
+    "touchpoints.csv": "21b901dbc2222ee7c64b6e0b58ffdd98bd89cb11a408f8375c0be91c61887e06",
+    "web_sessions.csv": "36bab75ad823e2dc2efe7b616b1a4e23b419c10a5cd7865d1ffa993cbd58d660",
+    "leads.csv": "54d2bb3b43139a8d4c10cc9f61e7c2c262bcc81c583afe248d9efa82792ab29f",
+    "lead_events.csv": "e09f6e2f2659edce7b78ebadd7187234eced496554c42569e385c7d611712248",
+    "opportunities.csv": "2c1d769a7e8cd3a8c003188bd773816c27df6ddcab83452cc24a749cacf16bf3",
+    "opportunity_events.csv": "1dc41f0d31cc1ad2648ae9b88d344d8d7d5c7c9839e3ebf81097ed0461781213",
+    "orders.csv": "32d4ca0dcbcce51e4b2da51e09c643316fca78e645a7557a4439e19e0ea092b8",
+    "cost_records.csv": "848850fd780d004e81ca42befeb8753480330a43d0c0bbc2c2a859f4d16f8cf5",
+    "attribution_results.csv": "7ce82f7564fb5466e0a446ea28373c8926f4e5776eef8f932b4f3394c1e74c74",
+    "campaign_metrics.csv": "3372fb964c2980a26387971a2913c6266c86cdd3ba6082b0805c25b6a162bd89",
+    "ground_truth.csv": "754aa350fc478a238fd3838c03adb0a1e3e9b74c57181d613a9b9d67a0e2d52d",
+    "ground_truth.json": "1fe81ab51d5a228710681e0aa3bbed92da466bfab27207775887d92826383e91",
+    "validation_summary.json": "7884ff7a6713b57283f7451ccc708a326d1ee3d429eeaf0d95aef6464ae2b5fd",
+    "schema.sql": "14d02e6286d9f980a5e1ab836c0e886bb3d80aea6c317a72921c40294e6ee181",
+    "seed.sql": "70cb20768ede09c4f02b25f50abe2ef273cb874fa00897f04d84423fc8a5e05d"
+  },
+  "rules_version": "attribution-v1",
+  "provenance": "Entirely synthetic; no external or personal data used."
+}
